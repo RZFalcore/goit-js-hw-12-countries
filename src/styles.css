@@ -1,3 +1,54 @@
-body {
+.container {
+  width: 100%;
   display: flex;
+  justify-content: center;
+}
+
+.countyInput {
+  height: 30px;
+  width: 200px;
+  margin: 30px auto;
+  padding: 3px;
+}
+
+.countryList {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  width: 600px;
+}
+
+.singleCountryItem {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.singleCountryItem__title {
+  width: fit-content;
+  margin: 40px auto;
+}
+
+.singleCountryItem__countryWrap {
+  display: flex;
+  justify-content: space-around;
+}
+
+
+.singleCountryItem__infoWrap {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  /* margin-right: 40px; */
+}
+
+.singleCountryItem__countryFlag {
+  width: 300px;
+  height: 250px;
+}
+
+.pnotify {
+  display: flex;
+  width: 300px;
+  height: 120px;
 }
