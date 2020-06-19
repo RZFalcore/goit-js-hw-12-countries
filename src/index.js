@@ -4,8 +4,6 @@ import debounce from 'lodash.debounce';
 import fetchCountry from './services/axios';
 import listTmp from './templates/list.hbs';
 import singleCounrtyTmp from './templates/country.hbs';
-import './styles.css';
-
 import {
   error,
   Stack,
@@ -13,16 +11,15 @@ import {
 } from '../node_modules/@pnotify/core/dist/PNotify.js';
 import * as PNotifyMobile from '../node_modules/@pnotify/mobile/dist/PNotifyMobile.js';
 
-defaultModules.set(PNotifyMobile, {});
 import '@pnotify/core/dist/BrightTheme.css';
+import './styles.css';
 
-// import './pnotify';
-// import { error } from '@pnotify/core';
-// import { notifyError } from './pnotify';
+defaultModules.set(PNotifyMobile, {});
 
 const refs = {
   input: document.querySelector('#countryInput'),
   list: document.querySelector('.countryList'),
+  container: document.querySelector('.container'),
 };
 
 refs.input.addEventListener('input', debounce(inputHandler, 500));
@@ -35,11 +32,6 @@ function inputHandler(e) {
       console.log(data);
 
       if (data.length > 10) {
-        // const errorStack = new Stack({
-        //   dir1: 'right',
-        //   dir2: 'right',
-        // });
-
         error({
           text: 'Too many matches found. Please enter a more specific query!',
           addClass: 'pnotify',
@@ -49,8 +41,10 @@ function inputHandler(e) {
           sticker: false,
           delay: 40000,
           stack: new Stack({
-            dir1: 'right',
-            dir2: 'right',
+            dir1: 'left',
+            dir2: 'left',
+
+            context: refs.container,
           }),
         });
       }
@@ -60,7 +54,6 @@ function inputHandler(e) {
         const markup = data.map(country => listTmp(country)).join('');
         console.log(markup);
         refs.list.insertAdjacentHTML('beforeend', markup);
-        notifyError.close(immdeiate);
       }
 
       if (data.length === 1) {
@@ -68,7 +61,6 @@ function inputHandler(e) {
         const markup = singleCounrtyTmp(data[0]);
         console.log(markup);
         refs.list.insertAdjacentHTML('beforeend', markup);
-        notifyError.close(immdeiate);
       }
     });
   }
