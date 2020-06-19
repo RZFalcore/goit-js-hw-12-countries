@@ -48,7 +48,7 @@
 }
 
 .pnotify {
-  display: flex;
+  /* display: flex; */
   width: 300px;
-  height: 120px;
+  height: 80px;
 }

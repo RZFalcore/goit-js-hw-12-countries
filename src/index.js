@@ -2,12 +2,22 @@ import './services/axios';
 import debounce from 'lodash.debounce';
 
 import fetchCountry from './services/axios';
-// import { error } from '@pnotify/core';
-import './pnotify';
 import listTmp from './templates/list.hbs';
 import singleCounrtyTmp from './templates/country.hbs';
 import './styles.css';
 
+import {
+  error,
+  Stack,
+  defaultModules,
+} from '../node_modules/@pnotify/core/dist/PNotify.js';
+import * as PNotifyMobile from '../node_modules/@pnotify/mobile/dist/PNotifyMobile.js';
+
+defaultModules.set(PNotifyMobile, {});
+import '@pnotify/core/dist/BrightTheme.css';
+
+// import './pnotify';
+// import { error } from '@pnotify/core';
 // import { notifyError } from './pnotify';
 
 const refs = {
@@ -25,13 +35,23 @@ function inputHandler(e) {
       console.log(data);
 
       if (data.length > 10) {
-        const notifyError = error({
+        // const errorStack = new Stack({
+        //   dir1: 'right',
+        //   dir2: 'right',
+        // });
+
+        error({
           text: 'Too many matches found. Please enter a more specific query!',
           addClass: 'pnotify',
+          icon: false,
           closerHover: true,
           closer: false,
           sticker: false,
-          stack: customStack,
+          delay: 40000,
+          stack: new Stack({
+            dir1: 'right',
+            dir2: 'right',
+          }),
         });
       }
 
